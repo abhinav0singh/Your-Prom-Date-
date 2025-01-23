@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Pairing App</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #74ebd5;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #567d9a;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            font-size: 2em;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .timer div {
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .timer span {
+            display: block;
+            font-size: 0.8em;
+        }
+
+        .quiz {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>Welcome to the Unique Pairing App</header>
+    <main>
+        <section id="register">
+            <h2>Register</h2>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Your @learner.manipal.edu email">
+            </div>
+            <button onclick="registerUser()">Register</button>
+        </section>
+
+        <section id="timer" class="timer">
+            <div>
+                <span id="days">00</span>
+                <span>Days</span>
+            </div>
+            <div>
+                <span id="hours">00</span>
+                <span>Hours</span>
+            </div>
+            <div>
+                <span id="minutes">00</span>
+                <span>Minutes</span>
+            </div>
+            <div>
+                <span id="seconds">00</span>
+                <span>Seconds</span>
+            </div>
+        </section>
+
+        <section id="quiz" class="quiz">
+            <h2>Take the Quiz</h2>
+            <div class="form-group">
+                <label for="q1">Question 1: Choose your favorite color:</label>
+                <select id="q1">
+                    <option>Red</option>
+                    <option>Blue</option>
+                    <option>Green</option>
+                    <option>Yellow</option>
+                </select>
+            </div>
+            <!-- Repeat for all 5 questions -->
+            <button onclick="submitQuiz()">Submit Quiz</button>
+        </section>
+    </main>
+
+    <script>
+        // Countdown Timer
+        function startCountdown(endDate) {
+            function updateTimer() {
+                const now = new Date().getTime();
+                const distance = endDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = days;
+                document.getElementById('hours').innerText = hours;
+                document.getElementById('minutes').innerText = minutes;
+                document.getElementById('seconds').innerText = seconds;
+
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    alert('The countdown has ended!');
+                }
+            }
+
+            const timerInterval = setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+
+        const eventDate = new Date();
+        eventDate.setDate(eventDate.getDate() + 5); // 5 days from now
+        startCountdown(eventDate.getTime());
+
+        // Dummy Functions for Backend Integration
+        function registerUser() {
+            alert('Registration API call placeholder');
+        }
+
+        function submitQuiz() {
+            alert('Quiz submission API call placeholder');
+        }
+    </script>
+</body>
+</html>
